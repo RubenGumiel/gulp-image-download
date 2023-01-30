@@ -42,7 +42,7 @@ function splitJSON(cb) {
 }
 
 function load(cb) {
-    let rawdata = fs.readFileSync('dest/images.json');
+    let rawdata = fs.readFileSync('dest/2.json');
     data = JSON.parse(rawdata);
     cb();
 }
@@ -50,7 +50,7 @@ function load(cb) {
 function downloadFiles(cb) {
     data.forEach(element => {
         let options = {
-            directory: "./files/",
+            directory: "./files/lot2/",
             filename: element.name
         }
         if (!fs.existsSync(options.directory + options.filename)) {
