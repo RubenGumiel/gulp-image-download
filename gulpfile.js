@@ -28,9 +28,16 @@ function splitJSON(cb) {
     const splitSize = 20;
     const rawdata = fs.readFileSync('output/images.json');
     const data = JSON.parse(rawdata);
-    const pages = Math.ceil(data.length/splitSize);
-    fs.writeFileSync("dest/programming.json", data);
-    console.log(pages);
+
+    let splitArray = [];
+    for (let index = 0, pageIndex = 1; index < data.length; index++) {
+        splitArray.push(data[index]);
+        if (splitArray.length === splitSize || index === data.length-1) {
+            splitArrayString = JSON.stringify(splitArray);
+            fs.writeFileSync(`dest/${pageIndex++}.json`, splitArrayString);
+            splitArray = [];
+        }
+    }
     cb();
 }
 
